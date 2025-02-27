@@ -4,7 +4,8 @@ This repository contains a simple implementation for controlling tally lights on
 
 ## Overview
 
-The Grass Valley LDK Gateway uses an XML-based protocol for communication. To control tally lights, we need to:
+The Grass Valley LDK Gateway uses an XML-based protocol for communication. 
+Steps;
 
 1. Authenticate with the gateway
 2. Send tally control commands using the same socket connection
@@ -29,8 +30,8 @@ Before sending any tally commands, authentication is required:
 <application-authentication-indication xml-protocol="2.0">
   <supported-xml-protocol>1.1</supported-xml-protocol>
   <supported-xml-protocol>2.0</supported-xml-protocol>
-  <name>VOM London</name>
-  <location>CAR</location>
+  <name>SYSTEM-NAME</name>
+  <location>SYSTEM-LOCATION</location>
 </application-authentication-indication>
 ```
 
@@ -68,35 +69,21 @@ After successful authentication, tally control commands can be sent using the sa
 
 Based on testing and Wireshark captures:
 
-- **Red Tally (Program)**: Function ID 8215
-- **Green Tally (Preview)**: Function ID 8216 (needs confirmation)
-- **Yellow Tally**: Function ID 8217 (needs confirmation)
+- **Red Tally**: Function ID 821
 
-## Important Implementation Details
+## Implementation Details
 
 1. **XML Version**: Use XML version 2.0 in the declaration
-2. **Session ID**: The session ID (9VDA4O in examples) identifies the specific camera/device
+2. **Session ID**: The session ID (9VDA4O in examples) identifies the specific tally red identifier for a specific camera/device (I think)
 3. **Socket Connection**: Maintain the same socket connection between authentication and tally commands
-4. **Value**: Use 1 to turn tally ON, 0 to turn tally OFF
 
 ## Usage
 
-The `gv_tally_control.py` script provides a simple interface to control tally lights:
-
 ```bash
 # Turn red tally ON for camera XCU-09
-python gv_tally_control.py --ip 10.10.126.51 --xcu XCU-09 --red on
+python gv_tally_control.py --ip {GATEWAY-IP} --xcu XCU-09 --red on
 
 # Turn red tally OFF for camera XCU-09
-python gv_tally_control.py --ip 10.10.126.51 --xcu XCU-09 --red off
-
-# Turn green tally ON for camera XCU-09
-python gv_tally_control.py --ip 10.10.126.51 --xcu XCU-09 --green on
-
-# Turn yellow tally ON for camera XCU-09
-python gv_tally_control.py --ip 10.10.126.51 --xcu XCU-09 --yellow on
+python gv_tally_control.py --ip {GATEWAY-IP} --xcu XCU-09 --red off
 ```
 
-## Notes
-
-This implementation was developed based on reverse engineering the protocol through Wireshark captures. The exact function IDs for green and yellow tally may need confirmation through further testing.
