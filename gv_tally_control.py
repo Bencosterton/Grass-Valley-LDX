@@ -1,11 +1,4 @@
 #!/usr/bin/env python3
-"""
-Grass Valley LDK Gateway Tally Control
-
-This script provides a simple interface to control tally lights on 
-Grass Valley LDK Gateway camera systems using XML commands.
-"""
-
 import socket
 import argparse
 import logging
@@ -13,7 +6,7 @@ import sys
 import time
 from datetime import datetime
 
-# Configure logging
+# Some logging as we go...
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -23,25 +16,21 @@ logging.basicConfig(
 )
 logger = logging.getLogger('gv_tally_control')
 
-# Constants
-DEFAULT_IP = "10.10.126.51"
+# System specifics
+DEFAULT_IP = "{GATEWAY-IP}"
 DEFAULT_PORT = 8080
 
-# Map XCU names to their respective session IDs
+# Map XCU names to their respective session IDs for red-tally
+# You may have to retrieve this using Camera Connect > System > 'View Log File'
 XCU_SESSION_IDS = {
-    "XCU-08": "PH1XQE",
-    "XCU-09": "9VDA4O",
-    "XCU-10": "8KXCNL"
+    "XCU-01": "PH1XQE",
+    "XCU-02": "9VDA4O",
+    "XCU-03": "8KXCNL"
 }
 
-# Default session ID if XCU not found in the mapping
-DEFAULT_SESSION_ID = "9VDA4O"
-
-# Function IDs for different tally types
+# This is a constant function id for adjustng red-tally
 FUNCTION_IDS = {
     "red": "8215",
-    "green": "8216",
-    "yellow": "8217"
 }
 
 def format_authentication_request(name="TallySender"):
@@ -141,21 +130,21 @@ def control_tally(ip, port, xcu_name, tally_type, state):
     Returns:
         bool: True if successful, False otherwise
     """
-    # Get the session ID for the specified XCU
+    # get sesion id's for cameras in this script, this is not reading from LDK Gateway, just readin what you've put in this file.
     session_id = XCU_SESSION_IDS.get(xcu_name, DEFAULT_SESSION_ID)
     logger.info(f"Using session ID {session_id} for {xcu_name}")
     
-    # Validate tally type
+    # check tally type (we only use red here)
     if tally_type not in FUNCTION_IDS:
         logger.error(f"Invalid tally type: {tally_type}. Must be one of: {', '.join(FUNCTION_IDS.keys())}")
         return False
     
-    # Validate state
+    # check status
     if state.lower() not in ["on", "off"]:
         logger.error(f"Invalid state: {state}. Must be 'on' or 'off'")
         return False
     
-    # Convert state to value
+    # convert state to value
     value = "1" if state.lower() == "on" else "0"
     
     # Send authentication request
@@ -168,8 +157,6 @@ def control_tally(ip, port, xcu_name, tally_type, state):
         return False
     
     # Check for successful authentication
-    # The gateway might not send a response immediately, or might send it after the next command
-    # We'll consider it successful if we don't get an error
     if auth_response and "result=\"Ok\"" not in auth_response:
         logger.error(f"Authentication failed: {auth_response}")
         socket.close()
@@ -177,7 +164,7 @@ def control_tally(ip, port, xcu_name, tally_type, state):
     
     logger.info("Authentication request sent")
     
-    # Small delay to ensure authentication is processed
+    # wait for response
     time.sleep(0.5)
     
     # Send tally command using the same socket
@@ -196,8 +183,7 @@ def control_tally(ip, port, xcu_name, tally_type, state):
             tally_response = socket.recv(4096).decode('utf-8')
             logger.debug(f"Tally response: {tally_response}")
             
-            # Check if the response contains either an OK or the authentication indication
-            # (which sometimes comes after the tally command)
+            # Check if response contains either an OK or the authentication indication
             if "result=\"Ok\"" in tally_response or "<application-authentication-indication" in tally_response:
                 logger.info(f"Successfully set {tally_type} tally to {state}")
                 result = True
