@@ -69,7 +69,7 @@ After successful authentication, tally control commands can be sent using the sa
 
 Based on testing, I've so far worked out;
 
-- **Red Tally**: 821
+- **Red Tally**: 8215
 
 ## Implementation Details
 
