@@ -67,9 +67,9 @@ After successful authentication, tally control commands can be sent using the sa
 
 ## Function IDs
 
-Based on testing and Wireshark captures:
+Based on testing, I've so far worked out;
 
-- **Red Tally**: Function ID 821
+- **Red Tally**: 821
 
 ## Implementation Details
 
