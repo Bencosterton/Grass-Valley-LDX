@@ -1,4 +1,4 @@
-# Grass Valley LDK Gateway Tally Control
+# Grass Valley LDK Gateway Control
 
 This repository contains a simple implementation for controlling tally lights on Grass Valley LDK Gateway camera systems using XML commands.
 
