@@ -110,6 +110,8 @@ Some useful functino IDs
 - **Red Gain**: 513
 - **Auto-Black**: 820
 - **Auto-Iris**: 784
+- Chec the GV_Function_IDs.txt file for full list of Basestation, Camera, and OCP functions_id's
+https://github.com/Bencosterton/Grass-Valley-LDX/blob/main/GV_Function_IDs.txt
 
 ## Implementation Details
 
