@@ -65,11 +65,51 @@ After successful authentication, tally control commands can be sent using the sa
 </function-value-change>
 ```
 
+Alsoit could be useful to check the status of a tally, maybe?:
+
+**Is Red Tally ON:**
+```xml
+<?xml version="2.0" encoding="UTF-8"?>
+<function-value-request>
+  <device>
+	<deviceid>XCU-09</deviceid>
+	<function id="8215">
+	</function>
+  </device>
+</function-value-request>
+```
+
+**Response:**
+```xml
+<request-response result="Ok" />
+<function-value-indication>
+  <device>
+	<sessionid>9VDA4O</sessionid>
+	<name>9</name>
+	<alias>ST1-CAM9</alias>
+	<deviceid>XCU-09</deviceid>
+	<type>Basestation</type>
+	<function id="8215" blocked="false">
+  	<value>0</value>
+	</function>
+  </device>
+</function-value-indication>
+```
+
+
 ## Function IDs
 
-Based on testing, I've so far worked out;
+Some useful functino IDs
 
 - **Red Tally**: 8215
+- **Green Tally**: 8265
+- **Yellow Tally**: 8234
+- **Enable colour bars**: 795
+- **Blue Gain**: 515
+- **Green Gain**: 514
+- **Red Gain**: 513
+- **Auto-Black**: 820
+- **Auto-Iris**: 784
 
 ## Implementation Details
 
