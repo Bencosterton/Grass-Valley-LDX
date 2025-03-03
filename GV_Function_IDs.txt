@@ -1,5 +1,11 @@
 # Grass Valley LDK Gateway Function IDs
 
+#Command types
+
+function-value-request - Get info from Gateway
+function-value-change - Send commands to Gateway
+
+
 ## 1. Camera Functions
 
 Active_SceneFile: 8200
