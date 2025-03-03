@@ -105,12 +105,9 @@ Some useful functino IDs
 - **Green Tally**: 8265
 - **Yellow Tally**: 8234
 - **Enable colour bars**: 795
-- **Blue Gain**: 515
-- **Green Gain**: 514
-- **Red Gain**: 513
-- **Auto-Black**: 820
-- **Auto-Iris**: 784
+- 
 - Chec the GV_Function_IDs.txt file for full list of Basestation, Camera, and OCP functions_id's
+- 
 https://github.com/Bencosterton/Grass-Valley-LDX/blob/main/GV_Function_IDs.txt
 
 ## Implementation Details
