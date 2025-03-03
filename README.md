@@ -8,13 +8,13 @@ The Grass Valley LDK Gateway uses an XML-based protocol for communication.
 Steps;
 
 1. Authenticate with the gateway
-2. Send tally control commands using the same socket connection
+2. Send control command using the same socket connection
 
 ## XML Protocol Details
 
 ### Authentication
 
-Before sending any tally commands, authentication is required:
+Before sending any commands, authentication is required:
 
 **Authentication Request:**
 ```xml
@@ -37,7 +37,7 @@ Before sending any tally commands, authentication is required:
 
 ### Tally Control Commands
 
-After successful authentication, tally control commands can be sent using the same socket connection:
+After successful authentication, control commands can be sent using the same socket connection:
 
 **Turn Red Tally ON:**
 ```xml
