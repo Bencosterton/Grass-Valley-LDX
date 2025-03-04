@@ -114,7 +114,7 @@ https://github.com/Bencosterton/Grass-Valley-LDX/blob/main/GV_Function_IDs.txt
 
 1. **XML Version**: Use XML version 2.0 in the declaration
 2. Depedning the the function, a sessionid, or deviceid can be used. Need to do more research here.
-3. **Socket Connection**: Maintain the same socket connection between authentication and tally commands
+3. **Socket Connection**: Maintain the same socket connection between authentication and commands
 
 ## Usage
 
