@@ -1,6 +1,11 @@
 # Grass Valley LDK Gateway Control
 
-This repository contains a simple implementation for sendin commands to Grass Valley LDK Gateway camera systems using XML.
+This repository contains an implementation for sending commands to Grass Valley LDK Gateway camera systems using XML.
+You can run the Flask web apllication on your network with will handle device discovery, issueing commands, checking on devices etc.
+Or use the bellow command exmaples to build your own worklow.
+
+![image](https://github.com/user-attachments/assets/7a582f88-ce06-4f6c-91e9-1ab1ac327c6c)
+
 
 ## Overview
 
@@ -65,7 +70,7 @@ After successful authentication, control commands can be sent using the same soc
 </function-value-change>
 ```
 
-Alsoit could be useful to check the status of a tally, maybe?:
+Also it could be useful to check the status of a tally, maybe?:
 
 **Is Red Tally ON:**
 ```xml
@@ -99,13 +104,6 @@ Alsoit could be useful to check the status of a tally, maybe?:
 
 ## Function IDs
 
-Some useful functino IDs
-
-- **Red Tally**: 8215
-- **Green Tally**: 8265
-- **Yellow Tally**: 8234
-- **Enable colour bars**: 795
-
 Check the GV_Function_IDs.txt file for full list of Basestation, Camera, and OCP functions_id's
 
 https://github.com/Bencosterton/Grass-Valley-LDX/blob/main/GV_Function_IDs.txt
@@ -116,13 +114,15 @@ https://github.com/Bencosterton/Grass-Valley-LDX/blob/main/GV_Function_IDs.txt
 2. Depedning the the function, a sessionid, or deviceid can be used. Need to do more research here.
 3. **Socket Connection**: Maintain the same socket connection between authentication and commands
 
-## Usage
+## Usage for web app
+
+-Install requirments
 
 ```bash
-# Turn red tally ON for camera XCU-09
-python gv_tally_control.py --ip {GATEWAY-IP} --xcu XCU-09 --red on
-
-# Turn red tally OFF for camera XCU-09
-python gv_tally_control.py --ip {GATEWAY-IP} --xcu XCU-09 --red off
+pip install -r requirements.txt
 ```
-
+- Run the Flaks app
+```bash
+python3 gv_command_server.py
+```
+- Enter your GV Gateway IP on the 'Config' page (I assume your using port 8080), then 'Save Configuraiton' > 'Authenticate Now' > 'Discover Devices'
