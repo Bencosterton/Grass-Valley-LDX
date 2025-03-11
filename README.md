@@ -1,7 +1,9 @@
 # Grass Valley LDK Gateway Control
 
 This repository contains an implementation for sending commands to Grass Valley LDK Gateway camera systems using XML.
-You can run the Flask web apllication on your network with will handle device discovery, issueing commands, checking on devices etc.
+
+You can run the Flask web apllication on your network which will handle device discovery, issueing commands, checking on devices etc.
+
 Or use the bellow command exmaples to build your own worklow.
 
 ![image](https://github.com/user-attachments/assets/7a582f88-ce06-4f6c-91e9-1ab1ac327c6c)
@@ -49,9 +51,9 @@ After successful authentication, control commands can be sent using the same soc
 <?xml version="2.0" encoding="UTF-8"?>
 <function-value-change>
   <device>
-    <sessionid>9VDA4O</sessionid>
+    <deviceid>XCU-09</deviceid>
     <function id="8215">
-      <Value>1</Value>
+      <value>1</value>
     </function>
   </device>
 </function-value-change>
@@ -62,9 +64,9 @@ After successful authentication, control commands can be sent using the same soc
 <?xml version="2.0" encoding="UTF-8"?>
 <function-value-change>
   <device>
-    <sessionid>9VDA4O</sessionid>
+    <deviceid>XCU-09</deviceid>
     <function id="8215">
-      <Value>0</Value>
+      <value>0</value>
     </function>
   </device>
 </function-value-change>
@@ -77,9 +79,9 @@ Also it could be useful to check the status of a tally, maybe?:
 <?xml version="2.0" encoding="UTF-8"?>
 <function-value-request>
   <device>
-	<deviceid>XCU-09</deviceid>
-	<function id="8215">
-	</function>
+    <deviceid>XCU-09</deviceid>
+    <function id="8215">
+    </function>
   </device>
 </function-value-request>
 ```
@@ -89,14 +91,14 @@ Also it could be useful to check the status of a tally, maybe?:
 <request-response result="Ok" />
 <function-value-indication>
   <device>
-	<sessionid>9VDA4O</sessionid>
-	<name>9</name>
-	<alias>ST1-CAM9</alias>
-	<deviceid>XCU-09</deviceid>
-	<type>Basestation</type>
-	<function id="8215" blocked="false">
-  	<value>0</value>
-	</function>
+    <sessionid>9VDA4O</sessionid>
+    <name>9</name>
+    <alias>ST1-CAM9</alias>
+    <deviceid>XCU-09</deviceid>
+    <type>Basestation</type>
+    <function id="8215" blocked="false">
+      <value>0</value>
+    </function>
   </device>
 </function-value-indication>
 ```
